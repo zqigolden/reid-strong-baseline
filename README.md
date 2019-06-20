@@ -1,3 +1,17 @@
+# Bag reid
+
+##划分数据集
+下载解压之后：
+```
+cd MVB_train
+mkdir bounding_box_train/ query/ bounding_box_test/
+cp Image/[012]* bounding_box_train/
+cp Image/[34]* bounding_box_test/
+for i in {3000..4018}; do ls gallery/${i}* | shuf | head -n1 | xargs -i mv {} query; done
+```
+
+---
+
 # Bags of Tricks and A Strong ReID Baseline
 Paper: "Bag of Tricks and A Strong Baseline for Deep Person Re-identification"[[pdf]](https://arxiv.org/abs/1903.07071)
 
@@ -186,4 +200,5 @@ python3 tools/test.py --config_file='configs/softmax_triplet_with_center.yml' MO
 ```bash
 python3 tools/test.py --config_file='configs/softmax_triplet_with_center.yml' MODEL.DEVICE_ID "('your device id')" DATASETS.NAMES "('dukemtmc')" TEST.NECK_FEAT "('after')" TEST.FEAT_NORM "('yes')" MODEL.PRETRAIN_CHOICE "('self')" TEST.RE_RANKING "('yes')" TEST.WEIGHT "('your path to trained checkpoints')"
 ```
+
 
