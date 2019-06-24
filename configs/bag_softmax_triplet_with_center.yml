@@ -4,7 +4,7 @@ MODEL:
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
-  DEVICE_ID: '"4,5,6,7"'
+  DEVICE_ID: '"7"'
 
 
 INPUT:
@@ -13,6 +13,7 @@ INPUT:
   PROB: 0.5 # random horizontal flip
   RE_PROB: 0.5 # random erasing
   PADDING: 10
+  ROTATE_DEGREE: 15
 
 DATASETS:
   NAMES: ('bag')
