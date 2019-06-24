@@ -1,5 +1,7 @@
 # Bag reid memo
 
+**注意使用前先git pull**
+
 ## 划分数据集
 
 下载解压之后：
