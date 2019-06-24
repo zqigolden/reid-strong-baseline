@@ -1,14 +1,31 @@
-# Bag reid
+# Bag reid memo
 
 ## 划分数据集
 
 下载解压之后：
-```
+
+```bash
 cd MVB_train
 mkdir bounding_box_train/ query/ bounding_box_test/
 cp Image/[012]* bounding_box_train/
 cp Image/[34]* bounding_box_test/
 for i in {3000..4018}; do ls gallery/${i}* | shuf | head -n1 | xargs -i mv {} query; done
+```
+
+## 修改配置文件
+**in configs/bag_softmax_triplet_with_center.yml**
+
+- MODEL.PRETRAIN_PATH 预训练模型位置
+   - 通过`from torchvision import models; models.resnet50(pretrained=True)` 下载到本机
+- MODEL.DEVICE_ID 可用显卡ID
+- DATASETS.ROOT_DIR 数据的根目录
+- OUTPUT_DIR 输出路径
+
+## 训练 (缺少包的话通过`pip3 -U --user 包名`安装好)
+
+```bash
+cd reid-strong-baseline
+python3 tools/train.py --config_file configs/bag_softmax_triplet_with_center.yml
 ```
 
 ---
