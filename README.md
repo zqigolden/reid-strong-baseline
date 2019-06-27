@@ -11,7 +11,7 @@ cd MVB_train
 mkdir bounding_box_train/ query/ bounding_box_test/
 cp Image/[012]* bounding_box_train/
 cp Image/[34]* bounding_box_test/
-for i in {3000..4018}; do ls gallery/${i}* | shuf | head -n1 | xargs -i mv {} query; done
+for i in {3000..4018}; do ls bounding_box_test/${i}* | shuf | head -n1 | xargs -i mv {} query; done
 ```
 
 ## 修改配置文件
