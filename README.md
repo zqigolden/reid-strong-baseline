@@ -32,14 +32,21 @@ python3 tools/train.py --config_file configs/bag_softmax_triplet_with_center.yml
 
 ---
 
-# Bags of Tricks and A Strong ReID Baseline
-Paper: "Bag of Tricks and A Strong Baseline for Deep Person Re-identification"[[pdf]](https://arxiv.org/abs/1903.07071)
+# Bag of Tricks and A Strong ReID Baseline
+
+Bag of Tricks and A Strong Baseline for Deep Person Re-identification. CVPRW2019, Oral.
+
+[[pdf]](http://openaccess.thecvf.com/content_CVPRW_2019/papers/TRMTMCT/Luo_Bag_of_Tricks_and_a_Strong_Baseline_for_Deep_Person_CVPRW_2019_paper.pdf)
+[[Slides]](https://drive.google.com/open?id=1h9SgdJenvfoNp9PTUxPiz5_K5HFCho-V)
+[[Poster]](https://drive.google.com/open?id=1izZYAwylBsrldxSMqHCH432P6hnyh1vR)
 
 The codes are expanded on a [ReID-baseline](https://github.com/L1aoXingyu/reid_baseline) , which is open sourced by our co-first author [Xingyu Liao](https://github.com/L1aoXingyu).
 
-Another re-implement is developed by python2.7 and pytorch0.4. [link](https://github.com/wangguanan/Pytorch-Person-REID-Baseline-Bag-of-Tricks)
+Another re-implement is developed by python2.7 and pytorch0.4. [[link]](https://github.com/wangguanan/Pytorch-Person-REID-Baseline-Bag-of-Tricks)
 
-A tiny repo with simple re-implement. [link](https://github.com/lulujianjie/person-reid-tiny-baseline)
+A tiny repo with simple re-implement. [[link]](https://github.com/lulujianjie/person-reid-tiny-baseline)
+
+Our baseline also achieves great performance on __Vehicle ReID__ task! [[link]](https://github.com/DTennant/reid_baseline_with_syncbn)
 
 ```
 @InProceedings{Luo_2019_CVPR_Workshops,
@@ -61,6 +68,8 @@ We support
 - [x] easy dataset preparation
 - [x] end-to-end training and evaluation
 - [x] high modular management
+- [x] speed up inference [[link]](https://github.com/DTennant/reid_baseline_with_syncbn)
+- [x] support multi-gpus training [[link]](https://github.com/DTennant/reid_baseline_with_syncbn)
 
 Bag of tricks
 - Warm up learning rate
@@ -74,8 +83,6 @@ Bag of tricks
 In the future, we will
 - [] support more datasets
 - [] support more models
-- [] speed up inference
-- [] support multi-gpus training
 - [] explore more tricks
 
 
@@ -107,6 +114,7 @@ In the future, we will
 | SeResNet101 | 94.6 (87.3) | 87.5 (78.0) |
 | SeResNeXt50 | 94.9 (87.6) | 88.0 (78.3) |
 | SeResNeXt101 | 95.0 (88.0) | 88.4 (79.0) |
+| IBN-Net50-a | 95.0 (88.2) | 90.1 (79.1) |
 
 [model(Market1501)](https://drive.google.com/open?id=1hn0sXLZ5yJcxtmuY-ItQfYD7hBtHwt7A)
 
@@ -164,7 +172,7 @@ The designed architecture follows this guide [PyTorch-Project-Template](https://
 
 5. Prepare pretrained model if you don't have
 
-    （1）Resnet
+    （1）ResNet
 
     ```python
     from torchvision import models
@@ -178,8 +186,11 @@ The designed architecture follows this guide [PyTorch-Project-Template](https://
     ```
     Then it will automatically download model in `~/.torch/models/`, you should set this path in `config/defaults.py` for all training or set in every single training config file in `configs/` or set in every single command.
 
-    （3）Load your self-trained model
+    （3）ResNet_IBN_a
 
+    You can download from here [[link]](https://github.com/XingangPan/IBN-Net)
+
+    （4）Load your self-trained model
     If you want to continue your train process based on your self-trained model, you can change the configuration `PRETRAIN_CHOICE` from 'imagenet' to 'self' and set the `PRETRAIN_PATH` to your self-trained model. We offer `Experiment-pretrain_choice-all_tricks-tri_center-market.sh` as an example. 
 
 6. If you want to know the detailed configurations and their meaning, please refer to `config/defaults.py`. If you want to set your own parameters, you can follow our method: create a new yml file, then set your own parameters.  Add `--config_file='configs/your yml file'` int the commands described below, then our code will merge your configuration. automatically.
