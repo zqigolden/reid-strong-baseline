@@ -1,6 +1,7 @@
 MODEL:
+  NAME: 'se_resnext50'
   PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: '/home/qzhu/.torch/models/resnet50-19c8e357.pth'
+  PRETRAIN_PATH: '/home/haoluo/.torch/models/se_resnext50_32x4d-a260b3a4.pth'
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
@@ -63,5 +64,5 @@ TEST:
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
 
-OUTPUT_DIR: '/ssd/zq/bag/output/bag_out_all'
+OUTPUT_DIR: '/ssd/zq/bag/output/bag_out_all_resnext50'
 

@@ -11,6 +11,11 @@ from ignite.metrics import Metric
 from data.datasets.eval_reid import eval_func
 from .re_ranking import re_ranking
 
+outpath = '/ssd/zq/bag/output/006_bag_result.npy'
+def output_ranking_result(distmat, q, g):
+    np.save(outpath, distmat)
+    np.save('/ssd/zq/bag/output/006_bag_result.q', q)
+    np.save('/ssd/zq/bag/output/006_bag_result.g', g)
 
 class R1_mAP(Metric):
     def __init__(self, num_query, max_rank=50, feat_norm='yes'):
@@ -48,6 +53,7 @@ class R1_mAP(Metric):
                   torch.pow(gf, 2).sum(dim=1, keepdim=True).expand(n, m).t()
         distmat.addmm_(1, -2, qf, gf.t())
         distmat = distmat.cpu().numpy()
+        output_ranking_result(distmat, q_pids, g_pids)
         cmc, mAP = eval_func(distmat, q_pids, g_pids, q_camids, g_camids)
 
         return cmc, mAP
@@ -92,6 +98,7 @@ class R1_mAP_reranking(Metric):
         # distmat = distmat.cpu().numpy()
         print("Enter reranking")
         distmat = re_ranking(qf, gf, k1=20, k2=6, lambda_value=0.3)
+        output_ranking_result(distmat, q_pids, g_pids)
         cmc, mAP = eval_func(distmat, q_pids, g_pids, q_camids, g_camids)
 
         return cmc, mAP
