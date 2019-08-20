@@ -8,6 +8,7 @@ import glob
 import re
 
 import os.path as osp
+import os
 
 from .bases import BaseImageDataset
 
@@ -67,14 +68,14 @@ class Bag(BaseImageDataset):
 
         pid_container = set()
         for img_path in img_paths:
-            pid = int(pattern.search(img_path).groups()[0])
+            pid = int(pattern.search(os.path.basename(img_path)).groups()[0])
             if pid == -1: continue  # junk images are just ignored
             pid_container.add(pid)
         pid2label = {pid: label for label, pid in enumerate(pid_container)}
 
         dataset = []
         for all_c, img_path in enumerate(img_paths):
-            pid = int(pattern.search(img_path).groups()[0])
+            pid = int(pattern.search(os.path.basename(img_path)).groups()[0])
             #if pid == -1: continue  # junk images are just ignored
             #assert 0 <= pid <= 1501  # pid == 0 means background
             #assert 1 <= camid <= 6
